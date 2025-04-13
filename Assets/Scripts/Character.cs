@@ -4,13 +4,18 @@ using Extensions;
 public class Character : MonoBehaviour, IDamageable
 {
     public Health health;
+    protected HealthBarView healthBarView;
+    public Mana mana;
+    protected ManaBarView manaBarView;
     public Armor armor;
     public Speed speed;
+
 
     public Stat attackDamage;
     public AttackSpeed attackSpeed;
     public Stat spellDamage;
 
+    protected Outline outline;
     protected Movement movement;
 
     //public List<Stat> stats = new List<Stat>();
@@ -35,12 +40,28 @@ public class Character : MonoBehaviour, IDamageable
     //}
     public virtual void Initialize()
     {
+        outline = GetComponent<Outline>();
+        Invoke(nameof(DisableOutline), 0.01f);
+
         movement = GetComponent<Movement>();
         speed.SetMovementController(movement);
 
         health.Start();
+        healthBarView = GetComponentInChildren<HealthBarView>();
+        healthBarView.Initialize(health);
+        health.regeneration.Initialize(health);
+        health.regeneration.Start();
+
+        mana.Start();
+        manaBarView = GetComponentInChildren<ManaBarView>();
+        manaBarView.Initialize(mana);
+        mana.regeneration.Initialize(mana);
+        mana.regeneration.Start();
+
         armor.Start();
         speed.Start();
+        
+
         attackDamage.Start();
         attackSpeed.Start();
         spellDamage.Start();
@@ -50,9 +71,15 @@ public class Character : MonoBehaviour, IDamageable
         Initialize();
     }
 
+    public virtual void Update()
+    {
+        health.regeneration.Regenerate(Time.deltaTime);
+        mana.regeneration.Regenerate(Time.deltaTime);
+    }
+
     public virtual float ApplyDamage(Damage damage)
     {
-        damage.amount = damage.amount * 100 / (100 + armor.total);
+        damage.amount = damage.amount * 100 / (100 + armor.Total);
 
         if (damage.amount < 0)
         {
@@ -69,17 +96,29 @@ public class Character : MonoBehaviour, IDamageable
         Debug.Log($"{nameof(gameObject)} took {damage.amount} damage");
         return damage.amount;
     }
+
+    public void Stop() => movement.Stop();
+
+    public void LookAt(Vector3 worldPosition) => movement.LookAt(worldPosition);
+
     protected virtual void Die()
     {
         Destroy(gameObject);
     }
-    private void OnValidate()
+    protected void DisableOutline()
+    {
+        outline.enabled = false;
+    }
+    protected void OnValidate()
     {
         //foreach (Stat stat in stats)
         //{
         //    stat.OnValidate();
         //}
         health.OnValidate();
+        health.regeneration.OnValidate();
+        mana.OnValidate();
+        mana.regeneration.OnValidate();
         armor.OnValidate();
         speed.OnValidate();
         attackDamage.OnValidate();

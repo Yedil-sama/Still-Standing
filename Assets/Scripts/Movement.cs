@@ -12,6 +12,25 @@ public class Movement : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
     }
+    public virtual void Stop()
+    {
+        agent.ResetPath();
+        agent.velocity = Vector3.zero;
+    }
+
+    public virtual void LookAt(Vector3 worldPosition)
+    {
+        Vector3 direction = worldPosition - transform.position;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude < 0.01f) return;
+
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = lookRotation;
+    }
+
+
+
     protected virtual void MoveToPosition(Vector3 position) { }
     protected virtual void MoveToTarget(GameObject target) { }
 

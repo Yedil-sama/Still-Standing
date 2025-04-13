@@ -12,20 +12,26 @@ public class Ability
     [SerializeField] private TMP_Text abilityText;
     [SerializeField] private KeyCode activationKey;
     [SerializeField] private float cooldownDuration;
-    private float currentCooldown = 0f;
-    private bool isOnCooldown = false;
+    [SerializeField] private float manaCost;
+    
 
     [Header("Indicators")]
     [SerializeField] private RectTransform indicatorTransform;
     [SerializeField] private Image indicatorImage;
     private bool isIndicatorEnabled = false;
 
-    public void Start()
+    protected float currentCooldown = 0f;
+    protected bool isOnCooldown = false;
+    protected Character owner;
+
+    public void Initialize(Character owner)
     {
+        this.owner = owner;
         indicatorImage.enabled = false;
         abilityCooldownImage.fillAmount = 0;
         abilityText.text = "";
     }
+
     public void HandleInput()
     {
         if (!isOnCooldown)
@@ -36,8 +42,16 @@ public class Ability
             }
             if (Input.GetMouseButtonDown(0) && isIndicatorEnabled)
             {
-                Activate();
-                EnableIndicator(false);
+                if (owner.mana.Current >= manaCost)
+                {
+                    owner.mana.Current -= manaCost;
+
+                    owner.Stop();
+                    owner.LookAt(GameManager.Instance.GetMousePosition());
+
+                    Activate();
+                    EnableIndicator(false);
+                }
             }
             if (Input.GetMouseButtonDown(1))
             {
@@ -46,6 +60,7 @@ public class Ability
 
         }
     }
+
     public void UpdateCooldown(float deltaTime)
     {
         if (!isOnCooldown) return;
@@ -64,18 +79,21 @@ public class Ability
             abilityText.text = Mathf.Ceil(currentCooldown).ToString();
         }
     }
+
     public void EnableIndicator(bool action)
     {
         indicatorImage.enabled = action;
         isIndicatorEnabled = action;
-        //PlayerInput.isAiming = action;
     }
+
     private void Activate()
     {
         isOnCooldown = true;
         currentCooldown = cooldownDuration;
         abilityCooldownImage.fillAmount = 1f;
+        
     }
+
     public void UpdateIndicator(Transform playerTransform)
     {
         Vector3 worldMousePos = Input.mousePosition;

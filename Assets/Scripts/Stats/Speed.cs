@@ -3,18 +3,21 @@ using System;
 [Serializable]
 public class Speed : Stat
 {
-    public float minSpeed => GameManager.Instance.minSpeed;
-
-    public float maxSpeed => GameManager.Instance.maxSpeed;
-    private Movement movement;
-    public override void AddBonus(float amount)
-    {
-        if (total + amount > maxSpeed)
+    public override float Bonus 
+    { 
+        get => base.Bonus;
+        set
         {
-            amount = maxSpeed - total;
-            base.AddBonus(amount);
+            if (value > maxSpeed)
+            {
+                value = maxSpeed;
+            }
+            base.Bonus = value;
         }
     }
+    public float minSpeed => GameManager.Instance.minSpeed;
+    public float maxSpeed => GameManager.Instance.maxSpeed;
+    private Movement movement;
     public void SetMovementController(Movement movement)
     {
         this.movement = movement;

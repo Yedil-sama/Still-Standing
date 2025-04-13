@@ -64,6 +64,10 @@ public class PlayerMovement : Movement
             highlightManager.DeselectHighlight();
             target = null;
         }
+        else if (position.y >= 0.1f)
+        {
+            target = null;
+        }
     }
     protected override void MoveToTarget(GameObject enemy)
     {

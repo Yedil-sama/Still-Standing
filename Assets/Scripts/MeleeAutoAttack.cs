@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMovement), typeof(Character))]
-public class AutoAttack : MonoBehaviour
+public class MeleeAutoAttack : MonoBehaviour
 {
     [SerializeField] protected AnimationClip attackAnimation;
     protected float attackInterval;
@@ -23,7 +23,7 @@ public class AutoAttack : MonoBehaviour
 
     public void Update()
     {
-        attackInterval = character.attackSpeed.baseAttackTime / (1 + character.attackSpeed.current / 100f);
+        attackInterval = character.attackSpeed.baseAttackTime / (1 + character.attackSpeed.Current / 100f);
 
         if (movement.target != null && movement.target.TryGetComponent<Character>(out target))
         {
@@ -41,7 +41,7 @@ public class AutoAttack : MonoBehaviour
     {
         if (target == null) return;
 
-        target.ApplyDamage(new Damage(character.attackDamage.current));
+        target.ApplyDamage(new Damage(character.attackDamage.Current));
         nextAttackTime = Time.time + attackInterval;
 
         animator.SetBool("AutoAttack", false);

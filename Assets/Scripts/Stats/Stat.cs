@@ -1,47 +1,91 @@
 using System;
+using UnityEngine;
 
 [Serializable]
-public class Stat
+public class Stat : IStat
 {
-    //public string name;
-    public float current;
-    public float baseValue;
-    public float bonus;
-    public float total => baseValue + bonus;
+    [SerializeField] protected float current;
+    public virtual float Current
+    {
+        get => current;
+        set
+        {
+            current = value;
+            ClampCurrent();
+        }
+    }
+
+    [SerializeField] protected float baseValue;
+    public virtual float BaseValue
+    {
+        get => baseValue;
+        set
+        {
+            baseValue = value;
+            ClampCurrent();
+        }
+    }
+
+    [SerializeField] protected float bonus;
+    public virtual float Bonus
+    {
+        get => bonus;
+        set
+        {
+            bonus = value;
+            total = baseValue + bonus;
+            ClampCurrent();
+        }
+    }
+
+    [SerializeField] protected float total;
+    public virtual float Total
+    {
+        get => total = baseValue + bonus;
+        set
+        {
+            float difference = total - value;
+
+            if (bonus >= difference)
+            {
+                bonus -= difference;
+            }
+            else
+            {
+                float remaining = difference - bonus;
+
+                bonus = 0;
+                baseValue -= remaining;
+
+                if (baseValue < 0)
+                {
+                    baseValue = 0;
+                }
+            }
+            ClampCurrent();
+        }
+    }
+
 
     public void Start()
     {
-        //name = GetType().Name;
-        current = total;
-    }
-
-    public virtual void AddBonus(float amount)
-    {
-        if (amount < 0) return;
-        bonus += amount;
-        ClampCurrent();
-    }
-
-    public virtual void RemoveBonus(float amount)
-    {
-        if (amount < 0) return;
-        bonus -= amount;
-        ClampCurrent();
+        Current = Total;
     }
 
     public virtual void OnValidate()
     {
         ClampCurrent();
     }
-    private void ClampCurrent()
+
+    public void ClampCurrent()
     {
-        if (current > total)
+        if (Current > Total)
         {
-            current = total;
+            Current = Total;
         }
-        if (current < 0)
+        if (Current < 0)
         {
-            current = 0;
+            Current = 0;
         }
     }
 }

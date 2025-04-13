@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,5 +25,15 @@ public class GameManager : MonoBehaviour
     //{
     //    player.Initialize();
     //}
+
+    public Vector3 GetMousePosition()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 10f;
+        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        worldMousePos.y = player.transform.position.y;
+
+        return worldMousePos;
+    }
 
 }
