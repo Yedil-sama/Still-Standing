@@ -1,63 +1,55 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 [Serializable]
 public class Ability
 {
-    [Header("HUD")]
+    [Header("Ability Data")]
     [SerializeField] private string abilityName;
-    [SerializeField] private Image abilityCooldownImage;
-    [SerializeField] private TMP_Text abilityText;
     [SerializeField] private KeyCode activationKey;
     [SerializeField] private float cooldownDuration;
     [SerializeField] private float manaCost;
-    
 
-    [Header("Indicators")]
-    [SerializeField] private RectTransform indicatorTransform;
-    [SerializeField] private Image indicatorImage;
-    private bool isIndicatorEnabled = false;
+    [Header("View")]
+    [SerializeField] private AbilityView abilityView;
 
     protected float currentCooldown = 0f;
     protected bool isOnCooldown = false;
+    protected bool isIndicatorEnabled = false;
+
     protected Character owner;
 
     public void Initialize(Character owner)
     {
         this.owner = owner;
-        indicatorImage.enabled = false;
-        abilityCooldownImage.fillAmount = 0;
-        abilityText.text = "";
+        abilityView.Initialize();
     }
 
     public void HandleInput()
     {
-        if (!isOnCooldown)
+        if (isOnCooldown)
         {
-            if (Input.GetKeyDown(activationKey))
-            {
-                EnableIndicator(true);
-            }
-            if (Input.GetMouseButtonDown(0) && isIndicatorEnabled)
-            {
-                if (owner.mana.Current >= manaCost)
-                {
-                    owner.mana.Current -= manaCost;
+            abilityView.SetCooldownColor(Color.grey);
+            return;
+        }
 
-                    owner.Stop();
-                    owner.LookAt(GameManager.Instance.GetMousePosition());
+        abilityView.SetCooldownColor(Color.white);
 
-                    Activate();
-                    EnableIndicator(false);
-                }
-            }
+        if (Input.GetKeyDown(activationKey))
+            EnableIndicator(true);
+
+        if (isIndicatorEnabled)
+        {
             if (Input.GetMouseButtonDown(1))
             {
-                EnableIndicator(false);
+                CancelCast();
+                return;
             }
 
+            if (Input.GetMouseButtonDown(0) && CanCast())
+            {
+                Cast();
+            }
         }
     }
 
@@ -66,32 +58,20 @@ public class Ability
         if (!isOnCooldown) return;
 
         currentCooldown -= deltaTime;
-        if (currentCooldown <= 0)
+
+        if (currentCooldown <= 0f)
         {
             isOnCooldown = false;
-            currentCooldown = 0;
-            abilityCooldownImage.fillAmount = 0;
-            abilityText.text = "";
+            currentCooldown = 0f;
+            abilityView.SetCooldownFill(0f);
+            abilityView.SetCooldownColor(Color.white);
+            abilityView.SetCooldownText("");
         }
         else
         {
-            abilityCooldownImage.fillAmount = currentCooldown / cooldownDuration;
-            abilityText.text = Mathf.Ceil(currentCooldown).ToString();
+            abilityView.SetCooldownFill(currentCooldown / cooldownDuration);
+            abilityView.SetCooldownText(Mathf.Ceil(currentCooldown).ToString());
         }
-    }
-
-    public void EnableIndicator(bool action)
-    {
-        indicatorImage.enabled = action;
-        isIndicatorEnabled = action;
-    }
-
-    private void Activate()
-    {
-        isOnCooldown = true;
-        currentCooldown = cooldownDuration;
-        abilityCooldownImage.fillAmount = 1f;
-        
     }
 
     public void UpdateIndicator(Transform playerTransform)
@@ -99,13 +79,44 @@ public class Ability
         Vector3 worldMousePos = Input.mousePosition;
         worldMousePos.z = 10f;
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(worldMousePos);
-
-        Vector3 direction = worldPosition - playerTransform.position;
-        direction.y = 0f;
-
-        float angle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-        indicatorTransform.rotation = Quaternion.Euler(0, angle, 0);
+        abilityView.UpdateIndicatorRotation(playerTransform.position, worldPosition);
     }
 
+    protected virtual void Cast()
+    {
+        owner.mana.Current -= manaCost;
+        owner.Stop();
+        owner.LookAt(GameManager.Instance.GetMousePosition());
 
+        Activate();
+        EnableIndicator(false);
+    }
+
+    protected virtual void Activate()
+    {
+        isOnCooldown = true;
+        currentCooldown = cooldownDuration;
+        abilityView.SetCooldownFill(1f);
+    }
+
+    protected virtual bool CanCast()
+    {
+        if (owner.mana.Current >= manaCost) return true;
+
+        abilityView.SetCooldownColor(Color.blue);
+        abilityView.SetCooldownFill(1f);
+        return false;
+    }
+
+    protected virtual void CancelCast()
+    {
+        EnableIndicator(false);
+    }
+
+    protected void EnableIndicator(bool active)
+    {
+        GameManager.Instance.isAbilitySelected = active;
+        abilityView.EnableIndicator(active);
+        isIndicatorEnabled = active;
+    }
 }

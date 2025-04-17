@@ -9,6 +9,8 @@ public class Health : Resource
 
         set
         {
+            base.Current = value;
+
             if (value > current)
             {
                 OnHealUp?.Invoke(value - current);
@@ -17,7 +19,6 @@ public class Health : Resource
             {
                 OnTakeDamage?.Invoke(current - value);
             }
-            base.Current = value;
         }
     }
     public bool isDead => current <= 0;

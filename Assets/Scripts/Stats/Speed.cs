@@ -20,7 +20,11 @@ public class Speed : Stat
     private Movement movement;
     public void SetMovementController(Movement movement)
     {
+        if (movement == null) return;
+
+        movement.Initialize();
         this.movement = movement;
+        movement.agent.speed = current;
     }
     public override void OnValidate()
     {

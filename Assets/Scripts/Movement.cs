@@ -5,10 +5,11 @@ using UnityEngine.AI;
 public class Movement : MonoBehaviour
 {
     public NavMeshAgent agent;
+    public float stoppingDistance = 1.5f;
     public float rotationSpeed = 0.05f;
     protected float rotateVelocity;
 
-    public virtual void Awake()
+    public virtual void Initialize()
     {
         agent = GetComponent<NavMeshAgent>();
     }
@@ -31,8 +32,25 @@ public class Movement : MonoBehaviour
 
 
 
-    protected virtual void MoveToPosition(Vector3 position) { }
-    protected virtual void MoveToTarget(GameObject target) { }
+    public virtual void Move(Vector3 destination)
+    {
+        if (Vector3.Distance(transform.position, destination) > stoppingDistance)
+        {
+            agent.SetDestination(destination);
+        }
+        else
+        {
+            Stop();
+        }
+    }
+
+    public virtual void Move(Transform target)
+    {
+        if (target == null) return;
+        Move(target.position);
+    }
+
+    public virtual void Move(GameObject target) => Move(target.gameObject.transform);
 
     protected virtual void Rotate(Vector3 lookAtPosition)
     {

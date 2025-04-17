@@ -9,6 +9,8 @@ public class Mana : Resource
 
         set
         {
+            base.Current = value;
+
             if (value > current)
             {
                 OnRestore?.Invoke(value - current);
@@ -17,7 +19,6 @@ public class Mana : Resource
             {
                 OnSpend?.Invoke(current - value);
             }
-            base.Current = value;
         }
     }
     public ManaRegeneration regeneration;

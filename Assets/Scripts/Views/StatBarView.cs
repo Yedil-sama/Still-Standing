@@ -1,12 +1,14 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public abstract class StatBarView<T> : MonoBehaviour where T : Stat
 {
     public T stat;
     public float currentView;
     public float lerpDuration = 0.5f;
+    [SerializeField] protected TMP_Text valueText;
 
     protected float lastValue;
     protected Image valueImage;
@@ -23,12 +25,19 @@ public abstract class StatBarView<T> : MonoBehaviour where T : Stat
         SubscribeEvents();
         currentView = stat.Current;
         lastValue = currentView;
-        UpdateView();
+        UpdateText();
+        UpdateFill();
     }
 
     protected abstract void SubscribeEvents();
 
-    public void UpdateView()
+    private void UpdateText()
+    {
+        if (valueText != null)
+            valueText.text = $"{Mathf.FloorToInt(stat.Current)} / {Mathf.FloorToInt(stat.Total)}";
+    }
+
+    private void UpdateFill()
     {
         float total = currentView / stat.Total;
 
@@ -38,7 +47,7 @@ public abstract class StatBarView<T> : MonoBehaviour where T : Stat
         }
         else
         {
-           valueImage.fillAmount = total;
+            valueImage.fillAmount = total;
         }
     }
 
@@ -50,25 +59,27 @@ public abstract class StatBarView<T> : MonoBehaviour where T : Stat
         }
 
         lastValue = currentView;
+        UpdateText();
         coroutine = StartCoroutine(LerpStat());
     }
 
     private IEnumerator LerpStat()
     {
-        float elapsedTime = 0;
-        float start = lastValue;
+        float elapsedTime = 0f;
+        float start = currentView;
         float target = stat.Current;
 
         while (elapsedTime < lerpDuration)
         {
-            currentView = Mathf.Lerp(start, target, elapsedTime / lerpDuration);
-            UpdateView();
+            float t = elapsedTime / lerpDuration;
+            currentView = Mathf.Lerp(start, target, t);
+            UpdateFill();
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         currentView = target;
-        UpdateView();
+        UpdateFill();
         coroutine = null;
     }
 }

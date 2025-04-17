@@ -1,0 +1,66 @@
+﻿
+==============================STILL STANDING==============================
+
+#1: [DONE]
+{
+	Experience System
+
+}[DONE][DONE][DONE][DONE][DONE][DONE][DONE][DONE]
+
+#2: 
+{
+	Add Abilities: 
+		- Throw projectile (damages)
+		- Area (damages)
+		- Permanent buff (+stats)
+		- Passive Ability
+}
+
+#3:
+{
+	Add Effect System:
+		- Temporary Buffs / Debuffs (effects)
+		- Conditional effects
+		- Conditional effects with Capped Duration
+}
+
+#4:
+{
+	Add Enemies:
+		- Simple follow / AFK enemy behavior
+		- Kite / Tarzan bahavior
+		- Ability 
+}
+
+#5:
+{
+	Add Items:
+		- Simple stat items
+		- Passive effect items
+		- Active effect items
+}
+
+#6:
+{
+	Add Inventory System:
+		- UI
+		- Item Rarities
+		- Hints for each item detail
+
+	Add Shop System:
+		- UI
+		- Search
+		- Hints for each item detail
+}
+
+#7:
+{
+	Add NPCs:
+		- Shopkeepers
+		- Traders
+			{
+				unique Shopkeepers who sell controlled-random unique items or effect;
+				different conditions to spawn;
+				different behavior: can fight with characters;
+			}
+}

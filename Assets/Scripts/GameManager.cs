@@ -1,10 +1,10 @@
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public bool isAbilitySelected = false;
     public Player player;
 
     public float minSpeed = 0.1f;
@@ -19,12 +19,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(Instance);
         }
-        //InitializePlayer();
+        InitializePlayer();
     }
-    //public void InitializePlayer()
-    //{
-    //    player.Initialize();
-    //}
+    public void InitializePlayer()
+    {
+        player.Initialize();
+    }
 
     public Vector3 GetMousePosition()
     {
