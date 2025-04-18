@@ -9,18 +9,18 @@ public class Player : Character
     public LevelProgressionData levelProgressionData;
 
     [SerializeField] private AbilitySystem abilitySystem;
-    [SerializeField] private MeleeAutoAttack autoAttack;
     [SerializeField] private ExperienceSystem experienceSystem;
 
     public override void Initialize()
     {
         base.Initialize();
         abilitySystem = GetComponent<AbilitySystem>();
-        autoAttack = GetComponent<MeleeAutoAttack>();
 
         interfaceHealthBarView.Initialize(health);
         interfaceManaBarView.Initialize(mana);
         experienceBarView.Initialize(experienceSystem = new ExperienceSystem(levelProgressionData));
+
+        abilitySystem.Initialize(this);
     }
 
     public override void Update()

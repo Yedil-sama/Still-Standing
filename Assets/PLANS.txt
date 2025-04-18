@@ -1,12 +1,5 @@
 ﻿
 ==============================STILL STANDING==============================
-
-#1: [DONE]
-{
-	Experience System
-
-}[DONE][DONE][DONE][DONE][DONE][DONE][DONE][DONE]
-
 #2: 
 {
 	Add Abilities: 

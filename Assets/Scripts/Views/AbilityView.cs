@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[System.Serializable]
-public class AbilityView
+[Serializable]
+public class AbilityView : IAbilityView
 {
     [Header("HUD")]
     [SerializeField] private Image abilityCooldownImage;

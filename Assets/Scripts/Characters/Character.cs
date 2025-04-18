@@ -1,5 +1,6 @@
 using UnityEngine;
 using Extensions;
+using System;
 
 public class Character : MonoBehaviour, IDamageable
 {
@@ -10,12 +11,18 @@ public class Character : MonoBehaviour, IDamageable
     protected ManaBarView manaBarView;
     public Armor armor;
     public Speed speed;
+
     public Stat attackDamage;
     public AttackSpeed attackSpeed;
     public Stat spellDamage;
 
     protected Outline outline;
     protected Movement movement;
+
+    public AutoAttack autoAttack;
+
+    public event Action<float> OnApplyDamage;
+    public event Action<float> OnTakeDamage;
 
     public virtual void Initialize()
     {
@@ -40,6 +47,8 @@ public class Character : MonoBehaviour, IDamageable
         armor.Start();
         speed.Start();
         speed.SetMovementController(movement);
+
+        autoAttack = GetComponent<AutoAttack>();
 
         attackDamage.Start();
         attackSpeed.Start();
@@ -72,7 +81,7 @@ public class Character : MonoBehaviour, IDamageable
             Die();
         }
 
-        Debug.Log($"{nameof(gameObject)} took {damage.amount} damage");
+        //Debug.Log($"{nameof(gameObject)} took {damage.amount} damage");
         return damage.amount;
     }
 

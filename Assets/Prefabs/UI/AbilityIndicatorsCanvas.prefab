@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3386618051386233331}
   - component: {fileID: 7024666734980551893}
   - component: {fileID: 1139857892674837622}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: AbilityIndicatorsCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1139857892674837622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 3382240546526360682}
   - component: {fileID: 8204149409737685001}
   - component: {fileID: 2086338017248939407}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: AbilityIndicator (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2252988412868468127}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Indicator (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5801489554879578436}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Indicator (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5795227241836166520}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Indicator (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3565335851598929647}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Indicator (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 3314976540059905155}
   - component: {fileID: 2868150548157195808}
   - component: {fileID: 2173775653948397570}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: AbilityIndicator (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 1298310693203095672}
   - component: {fileID: 626057437958750405}
   - component: {fileID: 613299553941775401}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: AbilityIndicator (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 7149185971387242784}
   - component: {fileID: 6425408096529782958}
   - component: {fileID: 101814938342774321}
-  m_Layer: 5
+  m_Layer: 13
   m_Name: AbilityIndicator (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

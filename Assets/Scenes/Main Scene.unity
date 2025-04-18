@@ -1819,22 +1819,13 @@ GameObject:
   m_Component:
   - component: {fileID: 436784023}
   - component: {fileID: 436784022}
-  - component: {fileID: 436784021}
   m_Layer: 0
-  m_Name: Dupe Cam
-  m_TagString: MainCamera
+  m_Name: Indicator Camera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!81 &436784021
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436784020}
-  m_Enabled: 1
+  m_IsActive: 1
 --- !u!20 &436784022
 Camera:
   m_ObjectHideFlags: 0
@@ -1844,7 +1835,7 @@ Camera:
   m_GameObject: {fileID: 436784020}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -1871,10 +1862,10 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8192
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1894,12 +1885,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436784020}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.044814955, y: -0.88921416, z: 0.44645604, w: 0.089256935}
-  m_LocalPosition: {x: 1.3387547, y: 6.5568852, z: 6.784317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 939983287}
+  m_Father: {fileID: 1589245845}
   m_LocalEulerAnglesHint: {x: 4.4880004, y: 0, z: 0}
 --- !u!224 &460216889 stripped
 RectTransform:
@@ -3621,7 +3612,6 @@ Transform:
   m_Children:
   - {fileID: 7704011017306937280}
   - {fileID: 1589245845}
-  - {fileID: 436784023}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &951030151 stripped
@@ -6389,7 +6379,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8183
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6413,7 +6403,8 @@ Transform:
   m_LocalPosition: {x: 1.187212, y: 7.149899, z: 5.8542023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 436784023}
   m_Father: {fileID: 939983287}
   m_LocalEulerAnglesHint: {x: 4.4880004, y: 0, z: 0}
 --- !u!114 &1589245846
@@ -15658,6 +15649,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityIndicatorsCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3386618051386233331, guid: 6be60baa33379a748a909f4ef527322d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 436784022}
     - target: {fileID: 7024666734980551893, guid: 6be60baa33379a748a909f4ef527322d, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -19884,11 +19879,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7360632246088660091, guid: 6be60baa33379a748a909f4ef527322d, type: 3}
   m_PrefabInstance: {fileID: 3962566130709194832}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &6307616825389028469 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 3386618051386233331, guid: 6be60baa33379a748a909f4ef527322d, type: 3}
-  m_PrefabInstance: {fileID: 3962566130709194832}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6318670646983288580
 Transform:
   m_ObjectHideFlags: 0
@@ -21846,44 +21836,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   playerTransform: {fileID: 7704011017306937280}
-  abilitiesCanvas: {fileID: 6307616825389028469}
   abilities:
-  - abilityName: Q
-    activationKey: 113
-    cooldownDuration: 5
-    manaCost: 20
-    abilityView:
-      abilityCooldownImage: {fileID: 910463909}
-      abilityText: {fileID: 472314365}
-      indicatorTransform: {fileID: 567525144}
-      indicatorImage: {fileID: 2020527412}
-  - abilityName: W
-    activationKey: 119
-    cooldownDuration: 7
-    manaCost: 30
-    abilityView:
-      abilityCooldownImage: {fileID: 658981122}
-      abilityText: {fileID: 832459229}
-      indicatorTransform: {fileID: 460216889}
-      indicatorImage: {fileID: 46750960}
-  - abilityName: E
-    activationKey: 101
-    cooldownDuration: 12
-    manaCost: 25
-    abilityView:
-      abilityCooldownImage: {fileID: 1387154218}
-      abilityText: {fileID: 2079372602}
-      indicatorTransform: {fileID: 1733526355}
-      indicatorImage: {fileID: 1802269844}
-  - abilityName: R
-    activationKey: 114
-    cooldownDuration: 60
-    manaCost: 100
-    abilityView:
-      abilityCooldownImage: {fileID: 1448484371}
-      abilityText: {fileID: 818941124}
-      indicatorTransform: {fileID: 1103860626}
-      indicatorImage: {fileID: 915056153}
+  - {fileID: 11400000, guid: 5ccaeb59ac022994098a389e5ae320a9, type: 2}
+  abilityViews:
+  - abilityCooldownImage: {fileID: 910463909}
+    abilityText: {fileID: 472314365}
+    indicatorTransform: {fileID: 567525144}
+    indicatorImage: {fileID: 2020527412}
+  - abilityCooldownImage: {fileID: 658981122}
+    abilityText: {fileID: 832459229}
+    indicatorTransform: {fileID: 460216889}
+    indicatorImage: {fileID: 46750960}
+  - abilityCooldownImage: {fileID: 1387154218}
+    abilityText: {fileID: 2079372602}
+    indicatorTransform: {fileID: 1733526355}
+    indicatorImage: {fileID: 1802269844}
+  - abilityCooldownImage: {fileID: 1448484371}
+    abilityText: {fileID: 818941124}
+    indicatorTransform: {fileID: 1103860626}
+    indicatorImage: {fileID: 915056153}
 --- !u!114 &7704011017306937285
 MonoBehaviour:
   m_ObjectHideFlags: 0
