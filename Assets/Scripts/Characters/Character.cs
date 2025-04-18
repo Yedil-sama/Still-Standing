@@ -48,7 +48,7 @@ public class Character : MonoBehaviour, IDamageable
         speed.Start();
         speed.SetMovementController(movement);
 
-        autoAttack = GetComponent<AutoAttack>();
+        //autoAttack = GetComponent<AutoAttack>();
 
         attackDamage.Start();
         attackSpeed.Start();

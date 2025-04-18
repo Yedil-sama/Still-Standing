@@ -8,9 +8,10 @@ public class Disamble : PlayerAbility
     [Header("Disamble Settings")]
     public int requiredStacks = 3;
     public float duration = 4f;
-    public float reducedAttackValue = 40f;
-    public float stackDuration = 2f;
+    public float reduceAttackValue = 40f;
+    public float stackDuration = 5f;
 
+    private bool isInited = false;
     private Dictionary<Character, int> enemyStacks = new();
     private Dictionary<Character, Coroutine> activeDebuffs = new();
     private Dictionary<Character, Coroutine> stackTimers = new();
@@ -18,8 +19,12 @@ public class Disamble : PlayerAbility
     public override void Initialize(Character owner)
     {
         base.Initialize(owner);
+        if (!isInited) { isInited = true; return; }
+
         owner.autoAttack.OnAutoAttackPerformed += HandleAutoAttack;
+        isInited = false;
     }
+
 
     private void HandleAutoAttack(Character target)
     {
@@ -29,6 +34,8 @@ public class Disamble : PlayerAbility
             enemyStacks[enemy] = 0;
 
         enemyStacks[enemy]++;
+
+        Debug.Log($"Disamble stack count is {enemyStacks[enemy]}");
 
         if (stackTimers.TryGetValue(enemy, out Coroutine stackTimer))
         {
@@ -77,12 +84,28 @@ public class Disamble : PlayerAbility
 
     private IEnumerator DoDisamble(Enemy enemy)
     {
-        float originalAttack = enemy.attackDamage.Current;
-        enemy.attackDamage.Current = reducedAttackValue;
+        if (activeDebuffs.ContainsKey(enemy))
+        {
+            owner.StopCoroutine(activeDebuffs[enemy]);
+        }
 
+        float attackDamageToAddBack = reduceAttackValue;
+
+        enemy.attackDamage.Current -= attackDamageToAddBack;
+        Debug.Log("Debuff applied");
+
+        Coroutine debuffCoroutine = owner.StartCoroutine(ResetDebuff(enemy, attackDamageToAddBack));
+        activeDebuffs[enemy] = debuffCoroutine;
+
+        yield return debuffCoroutine;
+    }
+
+    private IEnumerator ResetDebuff(Enemy enemy, float attackDamageToAddBack)
+    {
         yield return new WaitForSeconds(duration);
 
-        enemy.attackDamage.Current = originalAttack;
+        enemy.attackDamage.Current += attackDamageToAddBack;
+
         activeDebuffs.Remove(enemy);
     }
 }

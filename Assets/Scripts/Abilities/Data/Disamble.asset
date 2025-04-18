@@ -21,5 +21,6 @@ MonoBehaviour:
   activationKey: 0
   requiredStacks: 3
   duration: 4
-  reducedAttackValue: 40
-  stackDuration: 2
+  reduceAttackValue: 40
+  stackDuration: 5
+  isInited: 0

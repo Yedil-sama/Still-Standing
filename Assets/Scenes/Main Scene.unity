@@ -4218,6 +4218,7 @@ MonoBehaviour:
     baseValue: 0
     bonus: 0
     total: 0
+  autoAttack: {fileID: 0}
 --- !u!1 &1077311015
 GameObject:
   m_ObjectHideFlags: 0
@@ -21838,6 +21839,7 @@ MonoBehaviour:
   playerTransform: {fileID: 7704011017306937280}
   abilities:
   - {fileID: 11400000, guid: 5ccaeb59ac022994098a389e5ae320a9, type: 2}
+  - {fileID: 11400000, guid: 49a9ecbadf7fcb347aee6d4c46f43b66, type: 2}
   abilityViews:
   - abilityCooldownImage: {fileID: 910463909}
     abilityText: {fileID: 472314365}
@@ -21907,20 +21909,20 @@ MonoBehaviour:
   attackSpeed:
     current: 0
     baseValue: 3
-    bonus: 0
-    total: 3
+    bonus: 500
+    total: 503
     baseAttackTime: 1.5
   spellDamage:
     current: 0
     baseValue: 0
     bonus: 0
     total: 0
+  autoAttack: {fileID: 7704011017306937288}
   interfaceHealthBarView: {fileID: 917148020}
   interfaceManaBarView: {fileID: 1669638244}
   experienceBarView: {fileID: 951030151}
   levelProgressionData: {fileID: 11400000, guid: 2b1374839b09ed2409f0806e068ec90e, type: 2}
   abilitySystem: {fileID: 7704011017306937284}
-  autoAttack: {fileID: 7704011017306937286}
 --- !u!114 &7704011017306937286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21933,8 +21935,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7f9311b592cd443a51d8192fac56f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackAnimation: {fileID: -203655887218126122, guid: d32d982acb560eb4796e5898fd6a290d, type: 3}
   target: {fileID: 0}
+  attackWindupPercent: 0.5
+  attackAnimation: {fileID: -203655887218126122, guid: d32d982acb560eb4796e5898fd6a290d, type: 3}
 --- !u!114 &7704011017306937287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21966,6 +21969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  attackWindupPercent: 0.5
   attackAnimation: {fileID: -203655887218126122, guid: 517bdaed83ed55844a3931d5139463ad, type: 3}
   projectileSpeed: 5
   spawnTransform: {fileID: 1941446453}
@@ -23827,9 +23831,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health:
     current: 0
-    baseValue: 100
+    baseValue: 1111
     bonus: 0
-    total: 100
+    total: 1111
     regeneration:
       current: 0
       baseValue: 1
@@ -23859,9 +23863,9 @@ MonoBehaviour:
     total: 3
   attackDamage:
     current: 0
-    baseValue: 0
-    bonus: 0
-    total: 0
+    baseValue: 50
+    bonus: 40
+    total: 90
   attackSpeed:
     current: 0
     baseValue: 0
@@ -23873,6 +23877,7 @@ MonoBehaviour:
     baseValue: 0
     bonus: 0
     total: 0
+  autoAttack: {fileID: 0}
   targetTransform: {fileID: 7704011017306937280}
 --- !u!4 &9117845394016567579
 Transform:
