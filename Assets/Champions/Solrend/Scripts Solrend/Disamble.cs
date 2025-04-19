@@ -35,7 +35,7 @@ public class Disamble : PlayerAbility
 
         enemyStacks[enemy]++;
 
-        Debug.Log($"Disamble stack count is {enemyStacks[enemy]}");
+        //Debug.Log($"Disamble stack count is {enemyStacks[enemy]}");
 
         if (stackTimers.TryGetValue(enemy, out Coroutine stackTimer))
         {
@@ -92,7 +92,7 @@ public class Disamble : PlayerAbility
         float attackDamageToAddBack = reduceAttackValue;
 
         enemy.attackDamage.Current -= attackDamageToAddBack;
-        Debug.Log("Debuff applied");
+        //Debug.Log("Debuff applied");
 
         Coroutine debuffCoroutine = owner.StartCoroutine(ResetDebuff(enemy, attackDamageToAddBack));
         activeDebuffs[enemy] = debuffCoroutine;

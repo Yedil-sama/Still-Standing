@@ -6,7 +6,7 @@ public class MeleeAutoAttack : AutoAttack
     {
         if (target == null) return;
 
-        target.ApplyDamage(new Damage(character.attackDamage.Current));
+        character.DealDamage(new Damage(character.attackDamage.Current), target);
         nextAttackTime = Time.time + attackInterval;
 
         animator.SetBool("AutoAttack", false);

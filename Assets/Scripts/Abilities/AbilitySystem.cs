@@ -40,27 +40,24 @@ public class AbilitySystem : MonoBehaviour
         {
             ability.HandleInput();
             ability.UpdateCooldown(Time.deltaTime);
+            ability.UpdateView();
             ability.UpdateIndicator(playerTransform);
-        }
-    }
-
-    public void RefreshAllAbilityViews()
-    {
-        foreach (var ability in abilities)
-        {
-            if (ability is PlayerAbility playerAbility)
-            {
-                playerAbility.UpdateView();
-            }
         }
     }
 
     public void SetAbilities(List<Ability> newAbilities)
     {
+        foreach (var ability in abilities)
+        {
+            ability.Cleanup();
+        }
+
         abilities = newAbilities;
-        foreach (Ability ability in abilities)
+
+        foreach (var ability in abilities)
         {
             ability.Initialize(owner);
         }
     }
+
 }

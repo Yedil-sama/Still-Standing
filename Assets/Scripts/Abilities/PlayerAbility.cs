@@ -28,29 +28,6 @@ public abstract class PlayerAbility : Ability
         }
     }
 
-    public void UpdateView()
-    {
-        if (isOnCooldown)
-        {
-            abilityView?.SetCooldownColor(Color.grey);
-        }
-        else if (owner.mana.Current < manaCost)
-        {
-            abilityView?.SetCooldownColor(Color.blue);
-        }
-        else
-        {
-            abilityView?.SetCooldownColor(Color.white);
-        }
-
-    }
-
-    public override void Cast()
-    {
-        base.Cast();
-        GameManager.Instance.player.abilitySystem.RefreshAllAbilityViews();
-    }
-
     public override void Activate()
     {
         Debug.Log($"Activated {abilityName}!");

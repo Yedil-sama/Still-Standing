@@ -53,7 +53,6 @@ public abstract class Ability : ScriptableObject, IAbility
 
         isOnCooldown = true;
         currentCooldown = cooldownDuration;
-        abilityView?.SetCooldownFill(1f);
     }
 
     private IEnumerator DoCast()
@@ -69,20 +68,24 @@ public abstract class Ability : ScriptableObject, IAbility
         if (!isOnCooldown) return;
 
         currentCooldown -= deltaTime;
+
         if (currentCooldown <= 0f)
         {
             currentCooldown = 0f;
             isOnCooldown = false;
-            abilityView?.SetCooldownFill(0f);
-            abilityView?.SetCooldownText("");
-            abilityView?.SetCooldownColor(Color.white);
-        }
-        else
-        {
-            abilityView?.SetCooldownFill(currentCooldown / cooldownDuration);
-            abilityView?.SetCooldownText(Mathf.Ceil(currentCooldown).ToString());
         }
     }
+
+    public virtual void UpdateView()
+    {
+        bool hasEnoughMana = owner.mana.Current >= manaCost;
+        bool showFullFill = !isOnCooldown && !hasEnoughMana;
+
+        abilityView?.SetCooldownText(isOnCooldown ? Mathf.Ceil(currentCooldown).ToString() : "");
+        abilityView?.SetCooldownFill(isOnCooldown ? currentCooldown / cooldownDuration : showFullFill ? 1f : 0f);
+        abilityView?.SetCooldownColor(hasEnoughMana ? Color.gray : Color.blue);
+    }
+    public virtual void Cleanup() { }
 
     public virtual void HandleInput() { }
 

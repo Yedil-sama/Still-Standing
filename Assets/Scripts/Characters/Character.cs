@@ -15,15 +15,21 @@ public class Character : MonoBehaviour, IDamageable
 
     public Stat attackDamage;
     public AttackSpeed attackSpeed;
+    public float attackRange;
     public Stat spellDamage;
 
     protected Outline outline;
     public Movement movement;
-
     public AutoAttack autoAttack;
+
+    public float damageAmplification;
+    public float damageMultiplication;
 
     public event Action<float> OnApplyDamage;
     public event Action<float> OnTakeDamage;
+
+    public event Action<DamageContext> PreDealDamage;
+    public event Action<DamageContext> PostDealDamage;
 
     public virtual void Initialize()
     {
@@ -31,6 +37,7 @@ public class Character : MonoBehaviour, IDamageable
         Invoke(nameof(DisableOutline), 0.01f);
 
         movement = GetComponent<Movement>();
+        movement.stoppingDistance = attackRange;
         speed.SetMovementController(movement);
 
         health.Start();
@@ -47,17 +54,15 @@ public class Character : MonoBehaviour, IDamageable
 
         armor.Start();
         speed.Start();
-        speed.SetMovementController(movement);
-
-        //autoAttack = GetComponent<AutoAttack>();
-
         attackDamage.Start();
         attackSpeed.Start();
         spellDamage.Start();
     }
+
     public void Start()
     {
         Initialize();
+        OnValidate();
     }
 
     public virtual void Update()
@@ -72,24 +77,36 @@ public class Character : MonoBehaviour, IDamageable
         {
             damage.amount = damage.amount * 100 / (100 + armor.Current);
         }
-        if (damage.type == DamageType.Magical)
+        else if (damage.type == DamageType.Magical)
         {
             damage.amount = damage.amount * 100 / (100 + magicResistance.Current);
         }
-        if (damage.amount <= 0)
-        {
-            return damage.amount = 0;
-        }
 
+        damage.amount = Mathf.Max(0f, damage.amount);
         health.TakeDamage(damage.amount);
 
-        if (health.isDead)
-        {
-            Die();
-        }
+        if (health.isDead) Die();
 
-        Debug.Log($"{nameof(gameObject)} took {damage.amount} damage");
+        OnTakeDamage?.Invoke(damage.amount);
+
+        Debug.Log($"{gameObject.name} took {damage.amount} damage");
         return damage.amount;
+    }
+
+    public void DealDamage(Damage damage, Character target)
+    {
+        if (target == null) return;
+
+        var context = new DamageContext(damage, target);
+        PreDealDamage?.Invoke(context);
+
+        float finalAmount = (context.damage.amount + damageAmplification) * (1 + damageMultiplication);
+        Damage finalDamage = new Damage(finalAmount, context.damage.type);
+
+        target.ApplyDamage(finalDamage);
+
+        PostDealDamage?.Invoke(context);
+        OnApplyDamage?.Invoke(finalAmount);
     }
 
     public void Stop() => movement.Stop();
@@ -100,10 +117,12 @@ public class Character : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
     }
+
     protected void DisableOutline()
     {
         outline.enabled = false;
     }
+
     protected void OnValidate()
     {
         health.OnValidate();

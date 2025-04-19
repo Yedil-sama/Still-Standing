@@ -59,7 +59,7 @@ public class TruthUnfold : PlayerAbility
         {
             if (hitCollider.TryGetComponent<Character>(out Character enemy) && enemy != owner)
             {
-                enemy.ApplyDamage(new Damage(baseAmount + owner.attackDamage.Current * attackDamageScale + owner.spellDamage.Current * spellDamageScale, DamageType.True));
+                owner.DealDamage(new Damage(baseAmount + owner.attackDamage.Current * attackDamageScale + owner.spellDamage.Current * spellDamageScale, DamageType.True), enemy);
             }
         }
     }

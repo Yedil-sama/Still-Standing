@@ -52,6 +52,7 @@ public class Movement : MonoBehaviour
     public virtual void Move(Transform target)
     {
         if (target == null) return;
+
         Move(target.position);
     }
 

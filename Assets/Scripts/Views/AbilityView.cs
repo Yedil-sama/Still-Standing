@@ -11,8 +11,8 @@ public class AbilityView : IAbilityView
     [SerializeField] private TMP_Text abilityText;
 
     [Header("Indicators")]
+    public Image indicatorImage;
     [SerializeField] private RectTransform indicatorTransform;
-    [SerializeField] private Image indicatorImage;
 
     public void Initialize()
     {

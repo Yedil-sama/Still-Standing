@@ -14,10 +14,11 @@ public class DragonWaveProjectile : DirectionalProjectile
         if (hitCharacter == null || hitCharacter == owner) return;
 
         if (hitCharacters.Contains(hitCharacter)) return;
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
 
         hitCharacters.Add(hitCharacter);
-        hitCharacter.ApplyDamage(damage);
+        owner.DealDamage(damage, hitCharacter);
+
         damage.amount += damageIncreasePerHit;
     }
 }

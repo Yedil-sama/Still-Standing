@@ -41,7 +41,7 @@ public abstract class Projectile : MonoBehaviour
         Character hitCharacter = other.GetComponent<Character>();
         if (hitCharacter != null)
         {
-            hitCharacter.ApplyDamage(damage);
+            owner.DealDamage(damage, hitCharacter);
             Destroy(gameObject);
         }
     }

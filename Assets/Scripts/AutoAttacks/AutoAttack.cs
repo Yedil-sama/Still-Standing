@@ -32,55 +32,69 @@ public abstract class AutoAttack : MonoBehaviour
     {
         attackInterval = character.attackSpeed.baseAttackTime / (1 + character.attackSpeed.Current / 100f);
 
-        if (isInWindup && movement.agent.velocity.magnitude > 0.1f)
+        if (movement.target != null && movement.target.TryGetComponent<Character>(out target))
+        {
+            if (Vector3.Distance(transform.position, target.transform.position) <= movement.stoppingDistance)
+            {
+                if (attackCoroutine == null)
+                {
+                    attackCoroutine = StartCoroutine(DoAutoAttack());
+                }
+            }
+            else
+            {
+                CancelAttack();
+            }
+        }
+        else
         {
             CancelAttack();
         }
-
-        if (canAttack && Time.time > nextAttackTime)
-        {
-            if (movement.target != null && movement.target.TryGetComponent<Character>(out target))
-            {
-                if (Vector3.Distance(transform.position, target.transform.position) <= movement.stoppingDistance)
-                {
-                    attackCoroutine = StartCoroutine(PerformAttack());
-                }
-            }
-        }
     }
+
 
     protected abstract void Attack();
 
-    protected virtual IEnumerator PerformAttack()
+    protected virtual IEnumerator DoAutoAttack()
     {
-        canAttack = false;
-        isInWindup = true;
+        while (target != null && Vector3.Distance(transform.position, target.transform.position) <= movement.stoppingDistance)
+        {
+            canAttack = false;
+            isInWindup = true;
 
-        animator.SetBool("AutoAttack", true);
+            character.LookAt(target.transform.position);
+            animator.SetBool("AutoAttack", true);
 
-        float windupTime = attackAnimation.length * attackWindupPercent;
-        float animSpeed = attackAnimation.length / attackInterval;
-        animator.speed = animSpeed;
+            float windupTime = attackAnimation.length * attackWindupPercent;
+            float animSpeed = attackAnimation.length / attackInterval;
+            animator.speed = animSpeed;
 
-        yield return new WaitForSeconds(windupTime / animSpeed);
+            yield return new WaitForSeconds(windupTime / animSpeed);
 
-        if (!isInWindup) yield break;
+            if (!isInWindup)
+            {
+                break;
+            }
 
-        Attack();
-        OnAutoAttackPerformed?.Invoke(target);
+            Attack();
+            OnAutoAttackPerformed?.Invoke(target);
 
-        isInWindup = false;
+            isInWindup = false;
 
-        float remainingTime = attackInterval - windupTime;
-        if (remainingTime > 0)
-            yield return new WaitForSeconds(remainingTime / animSpeed);
+            float remainingTime = attackInterval - windupTime;
+            if (remainingTime > 0)
+                yield return new WaitForSeconds(remainingTime / animSpeed);
 
-        animator.SetBool("AutoAttack", false);
-        animator.speed = 1f;
+            animator.SetBool("AutoAttack", false);
+            animator.speed = 1f;
 
-        nextAttackTime = Time.time + attackInterval;
-        canAttack = true;
+            nextAttackTime = Time.time + attackInterval;
+            canAttack = true;
+        }
+
+        CancelAttack();
     }
+
 
     protected virtual void CancelAttack()
     {
