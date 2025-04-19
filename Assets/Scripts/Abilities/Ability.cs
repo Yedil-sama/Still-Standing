@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class Ability : ScriptableObject, IAbility
@@ -11,11 +13,16 @@ public abstract class Ability : ScriptableObject, IAbility
     public float attackDamageScale;
     public float spellDamageScale;
 
+    public float castTime;
+
     [Header("View")]
     public IAbilityView abilityView;
 
     protected Character owner;
+
+    [NonSerialized]
     protected float currentCooldown;
+
     protected bool isOnCooldown;
     protected bool isIndicatorEnabled;
 
@@ -35,11 +42,24 @@ public abstract class Ability : ScriptableObject, IAbility
         owner.Stop();
         owner.LookAt(GameManager.Instance.GetMousePosition());
 
-        Activate();
+        if (castTime > 0f)
+        {
+            owner.StartCoroutine(DoCast());
+        }
+        else
+        {
+            Activate();
+        }
 
         isOnCooldown = true;
         currentCooldown = cooldownDuration;
         abilityView?.SetCooldownFill(1f);
+    }
+
+    private IEnumerator DoCast()
+    {
+        yield return new WaitForSeconds(castTime);
+        Activate();
     }
 
     public abstract void Activate();

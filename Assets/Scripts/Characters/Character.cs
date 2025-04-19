@@ -10,6 +10,7 @@ public class Character : MonoBehaviour, IDamageable
     public Mana mana;
     protected ManaBarView manaBarView;
     public Armor armor;
+    public MagicResistance magicResistance;
     public Speed speed;
 
     public Stat attackDamage;
@@ -17,7 +18,7 @@ public class Character : MonoBehaviour, IDamageable
     public Stat spellDamage;
 
     protected Outline outline;
-    protected Movement movement;
+    public Movement movement;
 
     public AutoAttack autoAttack;
 
@@ -67,11 +68,17 @@ public class Character : MonoBehaviour, IDamageable
 
     public virtual float ApplyDamage(Damage damage)
     {
-        damage.amount = damage.amount * 100 / (100 + armor.Total);
-
-        if (damage.amount < 0)
+        if (damage.type == DamageType.Physical)
         {
-            damage.amount = 0;
+            damage.amount = damage.amount * 100 / (100 + armor.Current);
+        }
+        if (damage.type == DamageType.Magical)
+        {
+            damage.amount = damage.amount * 100 / (100 + magicResistance.Current);
+        }
+        if (damage.amount <= 0)
+        {
+            return damage.amount = 0;
         }
 
         health.TakeDamage(damage.amount);
@@ -81,7 +88,7 @@ public class Character : MonoBehaviour, IDamageable
             Die();
         }
 
-        //Debug.Log($"{nameof(gameObject)} took {damage.amount} damage");
+        Debug.Log($"{nameof(gameObject)} took {damage.amount} damage");
         return damage.amount;
     }
 

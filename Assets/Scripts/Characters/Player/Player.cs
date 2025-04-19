@@ -8,7 +8,7 @@ public class Player : Character
     public ExperienceBarView experienceBarView;
     public LevelProgressionData levelProgressionData;
 
-    [SerializeField] private AbilitySystem abilitySystem;
+    public AbilitySystem abilitySystem;
     [SerializeField] private ExperienceSystem experienceSystem;
 
     public override void Initialize()

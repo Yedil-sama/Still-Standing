@@ -44,6 +44,17 @@ public class AbilitySystem : MonoBehaviour
         }
     }
 
+    public void RefreshAllAbilityViews()
+    {
+        foreach (var ability in abilities)
+        {
+            if (ability is PlayerAbility playerAbility)
+            {
+                playerAbility.UpdateView();
+            }
+        }
+    }
+
     public void SetAbilities(List<Ability> newAbilities)
     {
         abilities = newAbilities;

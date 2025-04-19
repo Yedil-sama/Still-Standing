@@ -1,22 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Player Ability", fileName = "New Ability")]
-public class PlayerAbility : Ability
+public abstract class PlayerAbility : Ability
 {
     public KeyCode activationKey;
 
     public override void HandleInput()
     {
-        if (isOnCooldown)
-        {
-            abilityView?.SetCooldownColor(Color.grey);
-        }
-        else
-        {
-            abilityView?.SetCooldownColor(Color.white);
-        }
-
-        if (Input.GetKeyDown(activationKey))
+        if (Input.GetKeyDown(activationKey) && CanCast())
         {
             EnableIndicator(true);
         }
@@ -29,6 +19,7 @@ public class PlayerAbility : Ability
                 return;
             }
 
+
             if (Input.GetMouseButtonDown(0) && CanCast())
             {
                 Cast();
@@ -37,6 +28,28 @@ public class PlayerAbility : Ability
         }
     }
 
+    public void UpdateView()
+    {
+        if (isOnCooldown)
+        {
+            abilityView?.SetCooldownColor(Color.grey);
+        }
+        else if (owner.mana.Current < manaCost)
+        {
+            abilityView?.SetCooldownColor(Color.blue);
+        }
+        else
+        {
+            abilityView?.SetCooldownColor(Color.white);
+        }
+
+    }
+
+    public override void Cast()
+    {
+        base.Cast();
+        GameManager.Instance.player.abilitySystem.RefreshAllAbilityViews();
+    }
 
     public override void Activate()
     {

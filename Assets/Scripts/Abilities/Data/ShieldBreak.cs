@@ -1,13 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Player Ability/Shield Break", fileName = "New Shield Break")]
+[CreateAssetMenu(menuName = "SO/Player Ability/Shield Break", fileName = "Shield Break")]
 public class ShieldBreak : PlayerAbility
 {
     [Header("Shield Break")]
-    public float radius = 5f;
-    public float armorReduction = 10f;
-    public float effectDuration = 5f;
+    public float radius;
+    public float armorReduction;
+    public float effectDuration;
 
     public override void Activate()
     {

@@ -15,7 +15,7 @@ public class RangeAutoAttack : AutoAttack
 
         projectile = Instantiate(projectilePrefab, spawnTransform.position, spawnTransform.rotation);
 
-        Projectile proj = projectile.GetComponent<Projectile>();
+        HomingProjectile proj = projectile.GetComponent<HomingProjectile>();
 
         if (proj != null)
         {

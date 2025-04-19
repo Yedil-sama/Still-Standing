@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "SO/Player Ability/Disamble", fileName = "New Disamble")]
+[CreateAssetMenu(menuName = "SO/Player Ability/Disamble", fileName = "Disamble")]
 public class Disamble : PlayerAbility
 {
     [Header("Disamble Settings")]

@@ -8,6 +8,7 @@ public class PlayerMovement : Movement
 
     public Animator anim;
     private float motionSmoothTime = 0.1f;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -18,6 +19,7 @@ public class PlayerMovement : Movement
         Move();
         Animation();
     }
+
     public void Animation()
     {
         float normalizedSpeed = agent.velocity.magnitude / agent.speed;
@@ -41,10 +43,8 @@ public class PlayerMovement : Movement
                     {
                         Move(hit.collider.gameObject);
                     }
-
                 }
             }
-
         }
 
         if (target != null)
@@ -55,6 +55,7 @@ public class PlayerMovement : Movement
             }
         }
     }
+
     public override void Move(Vector3 position)
     {
         agent.SetDestination(position);
@@ -72,6 +73,7 @@ public class PlayerMovement : Movement
             target = null;
         }
     }
+
     public override void Move(GameObject enemy)
     {
         target = enemy;

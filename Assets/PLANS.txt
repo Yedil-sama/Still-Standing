@@ -1,26 +1,8 @@
 ﻿
 ==============================STILL STANDING==============================
-#2: 
-{
-	Add Abilities: 
-		- Throw projectile (damages)
-		- Area (damages)
-		- Permanent buff (+stats)
-		- Passive Ability
-}
-
-#3:
-{
-	Add Effect System:
-		- Temporary Buffs / Debuffs (effects)
-		- Conditional effects
-		- Conditional effects with Capped Duration
-}
-
 #4:
 {
 	Add Enemies:
-		- Simple follow / AFK enemy behavior
 		- Kite / Tarzan bahavior
 		- Ability 
 }

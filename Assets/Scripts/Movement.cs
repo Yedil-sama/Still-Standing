@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,10 +10,16 @@ public class Movement : MonoBehaviour
     public float rotationSpeed = 0.05f;
     protected float rotateVelocity;
 
+    private bool isDashing = false;
+    private float dashTime;
+    private float dashDistance;
+    private Vector3 dashDirection;
+
     public virtual void Initialize()
     {
         agent = GetComponent<NavMeshAgent>();
     }
+
     public virtual void Stop()
     {
         agent.ResetPath();
@@ -29,8 +36,6 @@ public class Movement : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(direction);
         transform.rotation = lookRotation;
     }
-
-
 
     public virtual void Move(Vector3 destination)
     {
@@ -59,4 +64,36 @@ public class Movement : MonoBehaviour
         transform.eulerAngles = new Vector3(0, rotationY, 0);
     }
 
+    public void StartDash(float distance, float height, float duration)
+    {
+        if (isDashing) return;
+
+        isDashing = true;
+        dashDistance = distance;
+        dashTime = duration;
+        dashDirection = transform.forward;
+
+        StartCoroutine(DashCoroutine(height));
+    }
+
+    private IEnumerator DashCoroutine(float height)
+    {
+        float dashProgress = 0f;
+
+        while (dashProgress < dashTime)
+        {
+            dashProgress += Time.deltaTime;
+
+            float dashSpeed = dashDistance / dashTime;
+            Vector3 dashMove = dashDirection * dashSpeed * Time.deltaTime;
+            transform.position += dashMove;
+
+            float dashHeight = Mathf.Sin(dashProgress / dashTime * Mathf.PI) * height;
+            transform.position = new Vector3(transform.position.x, dashHeight, transform.position.z);
+
+            yield return null;
+        }
+
+        isDashing = false;
+    }
 }
