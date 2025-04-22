@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class PlayerMovement : Movement
+public class PlayerMovement : CharacterMovement
 {
     [Header("Enemy Targetting")]
-    public GameObject target;
     [SerializeField] private HighlightManager highlightManager;
 
     public Animator anim;

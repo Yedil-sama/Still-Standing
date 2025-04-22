@@ -1,12 +1,14 @@
+using UnityEngine;
+
 public class NPC : Character
 {
-    protected CharacterBrain brain;
+    [SerializeField] protected NPCBrain brain;
 
     public override void Initialize()
     {
         base.Initialize();  
 
-        brain = gameObject.AddComponent<CharacterBrain>();
+        brain.Initialize(this);
         brain.SetBehavior(new WanderBehavior(this, movement));
     }
 

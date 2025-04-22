@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public int playerGold = 0;
     public bool isAbilitySelected = false;
     public Player player;
 

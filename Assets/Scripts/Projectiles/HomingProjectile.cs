@@ -2,20 +2,30 @@ using UnityEngine;
 
 public class HomingProjectile : Projectile
 {
-    private Transform target;
-
-    public void SetTarget(Transform newTarget)
+    public void SetTarget(Character newTarget)
     {
         target = newTarget;
     }
 
     protected override void Move()
     {
-        if (target != null)
+        if (target == null)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
-            transform.position += direction * speed * Time.deltaTime;
-            transform.LookAt(target);
+            Destroy(gameObject);
+            return;
+        }
+
+        Vector3 direction = (target.rootTransform.position - transform.position).normalized;
+        transform.position += direction * speed * Time.deltaTime;
+        transform.LookAt(target.rootTransform);
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (target != null && other.transform == target.transform)
+        {
+            owner.DealDamage(damage, target);
+            Destroy(gameObject);
         }
     }
 }

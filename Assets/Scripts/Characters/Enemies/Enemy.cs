@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    protected CharacterBrain brain;
-    public Transform targetTransform;
+    [SerializeField] protected CharacterBrain brain;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        brain = gameObject.AddComponent<CharacterBrain>();
-        brain.SetBehavior(new ChaseBehavior(this, movement, targetTransform));
+        brain = new EnemyAttackerBrain();
+        brain.Initialize(this);
+
+        brain.SetBehavior(new WanderBehavior(this, movement));
     }
 
     public override void Update()

@@ -3,10 +3,10 @@ using UnityEngine;
 public class ChaseBehavior : ICharacterBehavior
 {
     private Character character;
-    private Movement movement;
+    private CharacterMovement movement;
     private Transform targetTransform;
 
-    public ChaseBehavior(Character character, Movement movement, Transform targetTransform)
+    public ChaseBehavior(Character character, CharacterMovement movement, Transform targetTransform)
     {
         this.character = character;
         this.movement = movement;

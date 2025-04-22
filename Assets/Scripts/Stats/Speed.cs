@@ -17,8 +17,8 @@ public class Speed : Stat
     }
     public float minSpeed => GameManager.Instance.minSpeed;
     public float maxSpeed => GameManager.Instance.maxSpeed;
-    private Movement movement;
-    public void SetMovementController(Movement movement)
+    private CharacterMovement movement;
+    public void SetMovementController(CharacterMovement movement)
     {
         if (movement == null) return;
 

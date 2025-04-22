@@ -3,8 +3,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Movement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
+    public GameObject target;
     public NavMeshAgent agent;
     public float stoppingDistance = 1.5f;
     public float rotationSpeed = 0.05f;

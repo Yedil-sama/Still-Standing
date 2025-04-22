@@ -19,7 +19,7 @@ public class ShieldBreak : PlayerAbility
 
             if (enemy != null)
             {
-                owner.DealDamage(new Damage(baseAmount + owner.attackDamage.Current * attackDamageScale + owner.spellDamage.Current * spellDamageScale, DamageType.True), enemy);
+                owner.DealDamage(new Damage(baseAmount + owner.attackDamage.Current * attackDamageScale + owner.spellDamage.Current * spellDamageScale, DamageType.Magical), enemy);
                 owner.StartCoroutine(DoReduceArmor(enemy));
             }
         }

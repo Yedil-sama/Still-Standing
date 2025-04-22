@@ -5213,6 +5213,37 @@ Transform:
   - {fileID: 3596010301575527354}
   m_Father: {fileID: 5341325210888567086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7360097655454072596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6552375218918423509}
+  m_Layer: 6
+  m_Name: RootTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6552375218918423509
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7360097655454072596}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1126255801729246276}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7481805317863230173
 GameObject:
   m_ObjectHideFlags: 0
@@ -6821,6 +6852,7 @@ Transform:
   - {fileID: 182167048529803756}
   - {fileID: 1081151619154580994}
   - {fileID: 3741960160613278058}
+  - {fileID: 6552375218918423509}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4530852774033321384
@@ -6835,6 +6867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36c8b5e096829f945b38f42bce5bfadb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rootTransform: {fileID: 6552375218918423509}
   health:
     current: 0
     baseValue: 550
@@ -6951,10 +6984,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff43392e1cd08f44bb9ce3c98c95c22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   agent: {fileID: 1137892638391863162}
   stoppingDistance: 5
   rotationSpeed: 0.05
-  target: {fileID: 0}
   highlightManager: {fileID: 0}
   anim: {fileID: 7381235064198376974}
 --- !u!114 &4486445614018122840

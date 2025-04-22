@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMovement), typeof(Character))]
+[RequireComponent(typeof(CharacterMovement), typeof(Character))]
 public abstract class AutoAttack : MonoBehaviour
 {
     public Character target;
@@ -12,7 +12,7 @@ public abstract class AutoAttack : MonoBehaviour
     protected float nextAttackTime = 0;
     protected bool canAttack = true;
 
-    protected PlayerMovement movement;
+    protected CharacterMovement movement;
     protected Character character;
     protected Animator animator;
 
@@ -23,7 +23,7 @@ public abstract class AutoAttack : MonoBehaviour
 
     public virtual void Start()
     {
-        movement = GetComponent<PlayerMovement>();
+        movement = GetComponent<CharacterMovement>();
         character = GetComponent<Character>();
         animator = GetComponent<Animator>();
     }
@@ -52,7 +52,6 @@ public abstract class AutoAttack : MonoBehaviour
         }
     }
 
-
     protected abstract void Attack();
 
     protected virtual IEnumerator DoAutoAttack()
@@ -63,11 +62,15 @@ public abstract class AutoAttack : MonoBehaviour
             isInWindup = true;
 
             character.LookAt(target.transform.position);
-            animator.SetBool("AutoAttack", true);
 
             float windupTime = attackAnimation.length * attackWindupPercent;
             float animSpeed = attackAnimation.length / attackInterval;
-            animator.speed = animSpeed;
+
+            if (animator != null)
+            {
+                animator.speed = animSpeed;
+                animator.SetBool("AutoAttack", true);
+            }
 
             yield return new WaitForSeconds(windupTime / animSpeed);
 
@@ -85,8 +88,11 @@ public abstract class AutoAttack : MonoBehaviour
             if (remainingTime > 0)
                 yield return new WaitForSeconds(remainingTime / animSpeed);
 
-            animator.SetBool("AutoAttack", false);
-            animator.speed = 1f;
+            if (animator != null)
+            {
+                animator.SetBool("AutoAttack", false);
+                animator.speed = 1f;
+            }
 
             nextAttackTime = Time.time + attackInterval;
             canAttack = true;
@@ -95,14 +101,16 @@ public abstract class AutoAttack : MonoBehaviour
         CancelAttack();
     }
 
-
     protected virtual void CancelAttack()
     {
         if (attackCoroutine != null)
             StopCoroutine(attackCoroutine);
 
-        animator.SetBool("AutoAttack", false);
-        animator.speed = 1f;
+        if (animator != null)
+        {
+            animator.SetBool("AutoAttack", false);
+            animator.speed = 1f;
+        }
 
         isInWindup = false;
         canAttack = true;

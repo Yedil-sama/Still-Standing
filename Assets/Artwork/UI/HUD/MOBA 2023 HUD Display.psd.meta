@@ -178,7 +178,7 @@ TextureImporter:
         width: 235
         height: 240
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -199,7 +199,7 @@ TextureImporter:
         width: 379
         height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -225,6 +225,7 @@ TextureImporter:
       MOBA 2023 HUD Display_0: -292257571
       MOBA 2023 HUD Display_1: 1277969349
       MOBA 2023 HUD Display_2: 1931599994
+      MOBA 2023 HUD Display_3: -244113802
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

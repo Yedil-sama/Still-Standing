@@ -1,15 +1,45 @@
 ﻿
 ==============================STILL STANDING==============================
+
+Damage Varity:
+	Raw_Damage; Post_Mitigation_Damage; Pre_Mitigation_Damage; Damage_Over_Time; Damage_Amplification; Damage_Multiplication;
+
+Defence Varity: 
+	Defence_Stat_Mitigation; Damage_Block; Damage_Reduction; 
+
+Mobility Varity:
+	Movement_Speed; Dash; Teleport; 
+
 #4:
 {
 	Add Enemies:
-		- Kite / Tarzan bahavior
 		- Ability 
 }
 
 #5:
 {
 	Add Items:
+		- Follow each Item's qimmick
+			{
+				Sword = DAMAGE(mostly raw_damage / damage_amplification) && DEFENCE(any)
+
+				Bow = DAMAGE(mostly raw_damage / damage_amplification) && MOBILITY(almost all movement_speed)
+
+				Helmet = DEFENCE() && DAMAGE()
+				
+				Chestplate = DEFENCE(any)
+				
+				Leggings = DEFENCE(any) && MOBILITY(small movement_speed)
+				
+				Boots = MOBILITY(move_speed) && DEFENCE(small defence)
+				
+				Sleeves = DAMAGE(stat) && DEFENCE
+				
+				Gloves = DAMAGE(passive effect) && DEFENCE
+				
+				Other = ANYTHING
+			}
+
 		- Simple stat items
 		- Passive effect items
 		- Active effect items
@@ -38,4 +68,38 @@
 				different conditions to spawn;
 				different behavior: can fight with characters;
 			}
+}
+
+#8:
+{
+	Add Biomes:
+		- Refactor spawn biome as Field Biome
+		- Snow Biome
+			{
+				main qimmick = slow and health_regeneration_decrease_debuff
+				a sword with health_regeneration_decrease_debuff
+			}
+		- Hell Biome
+			{
+				main qimmick = damage_over_time
+			}
+		- Swamp Biome
+			{
+				main qimmick = defence_stat_decrease_debuff and long but small damage_over_time 
+			}
+		- Kingdom Biome
+			{
+				main qimmick = high defence_stat
+			}
+
+	Add Crafting of Certain Biomes' Item combination:
+		- 
+}
+
+#9:
+{
+	Add GameState:
+		- Player reached a certain condition so this happens
+		- Day / Night game states
+		- Early / Mid / Late game state seperations
 }

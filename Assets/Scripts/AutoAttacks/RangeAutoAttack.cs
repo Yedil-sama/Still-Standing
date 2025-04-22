@@ -5,7 +5,7 @@ public class RangeAutoAttack : AutoAttack
     [Header("ProjectileSettings")]
     public float projectileSpeed;
     public Transform spawnTransform;
-    [SerializeField] protected GameObject projectile;
+    protected GameObject projectile;
     [SerializeField] protected GameObject projectilePrefab;
     protected Damage projectileDamage;
 
@@ -21,7 +21,8 @@ public class RangeAutoAttack : AutoAttack
         {
             proj.speed = projectileSpeed;
             proj.damage = new Damage(character.attackDamage.Current);
-            proj.SetTarget(target.transform);
+            proj.owner = character;
+            proj.SetTarget(target);
         }
 
         nextAttackTime = Time.time + attackInterval;

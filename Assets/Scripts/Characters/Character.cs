@@ -4,6 +4,8 @@ using System;
 
 public class Character : MonoBehaviour, IDamageable
 {
+    public Transform rootTransform;
+
     [Header("Stats")]
     public Health health;
     protected HealthBarView healthBarView;
@@ -19,7 +21,7 @@ public class Character : MonoBehaviour, IDamageable
     public Stat spellDamage;
 
     protected Outline outline;
-    public Movement movement;
+    public CharacterMovement movement;
     public AutoAttack autoAttack;
 
     public float damageAmplification;
@@ -36,7 +38,9 @@ public class Character : MonoBehaviour, IDamageable
         outline = GetComponent<Outline>();
         Invoke(nameof(DisableOutline), 0.01f);
 
-        movement = GetComponent<Movement>();
+        autoAttack = GetComponent<AutoAttack>();
+
+        movement = GetComponent<CharacterMovement>();
         movement.stoppingDistance = attackRange;
         speed.SetMovementController(movement);
 

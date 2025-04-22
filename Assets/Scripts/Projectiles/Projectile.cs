@@ -5,7 +5,7 @@ public abstract class Projectile : MonoBehaviour
     public float speed;
     public Damage damage;
     public float lifetime = 5f;
-    private Transform target;
+    protected Character target;
     private float timeAlive = 0f;
 
     public float maxDistance = 50f;
@@ -38,10 +38,9 @@ public abstract class Projectile : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        Character hitCharacter = other.GetComponent<Character>();
-        if (hitCharacter != null)
+        if (target != null && other.GetComponent<Character>() != owner)
         {
-            owner.DealDamage(damage, hitCharacter);
+            owner.DealDamage(damage, target);
             Destroy(gameObject);
         }
     }

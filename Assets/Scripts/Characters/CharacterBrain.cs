@@ -1,8 +1,22 @@
-using UnityEngine;
+using System;
 
-public class CharacterBrain : MonoBehaviour
+[Serializable]
+public class CharacterBrain
 {
-    private ICharacterBehavior currentBehavior;
+    public float viewRange = 10f;
+    public float waitDuration = 3f;
+    protected ICharacterBehavior currentBehavior;
+    protected Character owner;
+    protected Player player;
+
+    public virtual void Initialize(Character owner)
+    {
+        this.owner = owner;
+        SetBehavior(new WanderBehavior(owner, owner.movement));
+        player = GameManager.Instance.player;
+    }
+
+    public virtual void Update() => currentBehavior?.Update();
 
     public void SetBehavior(ICharacterBehavior behavior)
     {
@@ -10,6 +24,4 @@ public class CharacterBrain : MonoBehaviour
         currentBehavior = behavior;
         currentBehavior?.Enter();
     }
-
-    public void Update() => currentBehavior?.Update();
 }
