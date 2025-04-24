@@ -13,7 +13,7 @@ public class DragonWave : PlayerAbility
     {
         if (projectilePrefab == null || owner == null) return;
 
-        Vector3 spawnPosition = owner.transform.position + owner.transform.forward;
+        Vector3 spawnPosition = owner.rootTransform.position;
         Vector3 direction = (GameManager.Instance.GetMousePosition() - owner.transform.position).normalized;
 
         GameObject projectileGO = GameObject.Instantiate(projectilePrefab, spawnPosition, Quaternion.LookRotation(direction));

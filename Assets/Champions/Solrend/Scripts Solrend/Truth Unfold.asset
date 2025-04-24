@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Truth Unfold
   cooldownDuration: 60
   manaCost: 100
-  baseAmount: 100
+  baseAmount: 200
   attackDamageScale: 1.1
   spellDamageScale: 1
   castTime: 0.5

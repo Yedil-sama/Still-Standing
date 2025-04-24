@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Dragon Wave
   cooldownDuration: 6
   manaCost: 35
-  baseAmount: 5
+  baseAmount: 15
   attackDamageScale: 0.9
   spellDamageScale: 0.4
   castTime: 0.1

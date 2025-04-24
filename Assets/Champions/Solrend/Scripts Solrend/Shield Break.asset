@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Shield Break
   cooldownDuration: 12
   manaCost: 50
-  baseAmount: 10
+  baseAmount: 30
   attackDamageScale: 0.2
   spellDamageScale: 0.7
   castTime: 0

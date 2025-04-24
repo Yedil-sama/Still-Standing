@@ -43,7 +43,10 @@ public class AbilityView : IAbilityView
     public void EnableIndicator(bool active)
     {
         if (indicatorImage != null)
+        {
+            indicatorImage.gameObject.SetActive(active);
             indicatorImage.enabled = active;
+        }
     }
 
     public void UpdateIndicatorRotation(Vector3 from, Vector3 to)

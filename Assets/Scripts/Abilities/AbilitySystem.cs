@@ -33,7 +33,6 @@ public class AbilitySystem : MonoBehaviour
         }
     }
 
-
     private void Update()
     {
         foreach (Ability ability in abilities)

@@ -9,7 +9,6 @@ public class NPC : Character
         base.Initialize();  
 
         brain.Initialize(this);
-        brain.SetBehavior(new WanderBehavior(this, movement));
     }
 
     public override void Update() 
