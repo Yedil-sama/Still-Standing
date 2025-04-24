@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4dd8fa7228db842a6fd81f6431ec71, type: 3}
+  m_Name: Witness End
+  m_EditorClassIdentifier: 
+  itemName: Witness End
+  itemDescription: 'Witness:
+
+    - Attacks give owner stacking +5 MagicResistance
+    for 5 seconds, maximum 10 stacks.'
+  icon: {fileID: 21300000, guid: 823767634ff5bce4d9952cb4c7b84b76, type: 3}
+  statModifiers:
+  - type: 5
+    value: 70
+    modifierType: 0
+  - type: 8
+    value: 40
+    modifierType: 0
+  effects:
+  - {fileID: 11400000, guid: 92dba22ec5e2efe4b993d634ee9ca51f, type: 2}

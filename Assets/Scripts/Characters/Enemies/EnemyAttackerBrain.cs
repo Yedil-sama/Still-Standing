@@ -10,7 +10,6 @@ public class EnemyAttackerBrain : CharacterBrain
     {
         base.Initialize(owner);
         autoAttack = owner.GetComponent<AutoAttack>();
-        Debug.Log("innited");
     }
 
     public override void Update()
@@ -31,7 +30,6 @@ public class EnemyAttackerBrain : CharacterBrain
             if (autoAttack != null && distanceToPlayer <= owner.attackRange)
             {
                 owner.movement.target = player.gameObject;
-                Debug.Log("attacking");
             }
 
             return;

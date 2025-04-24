@@ -101,7 +101,7 @@ public class Character : MonoBehaviour, IDamageable
     {
         if (target == null) return;
 
-        var context = new DamageContext(damage, target);
+        var context = new DamageContext(damage, target, this);
         PreDealDamage?.Invoke(context);
 
         float finalAmount = (context.damage.amount + damageAmplification) * (1 + damageMultiplication);

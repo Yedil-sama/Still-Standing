@@ -19,6 +19,8 @@ public class Health : Resource
             {
                 OnTakeDamage?.Invoke(current - value);
             }
+
+            ClampCurrent();
         }
     }
     public bool isDead => current <= 0;
