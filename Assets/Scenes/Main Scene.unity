@@ -5041,6 +5041,17 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.44654366, y: 0.023139551, z: -0.00000014156103}
     m_Extent: {x: 0.44921085, y: 0.16937764, z: 0.22218359}
   m_DirtyAABB: 0
+--- !u!114 &784162796 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8962612166087867577, guid: 8dfd662eef1d48a489cdf17514db0a23, type: 3}
+  m_PrefabInstance: {fileID: 2891032762924859360}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &786308650
 GameObject:
   m_ObjectHideFlags: 0
@@ -13829,11 +13840,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece3b1d4a1fc3a64e895c0629a2f75f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGold: 0
+  goldIncome: 1
+  goldIncomeInterval: 0.5
   isAbilitySelected: 0
   player: {fileID: 7704011017306937285}
   minSpeed: 1
   maxSpeed: 100
+  goldText: {fileID: 784162796}
 --- !u!1 &1870483582
 GameObject:
   m_ObjectHideFlags: 0
