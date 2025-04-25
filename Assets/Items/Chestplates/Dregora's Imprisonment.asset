@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4dd8fa7228db842a6fd81f6431ec71, type: 3}
+  m_Name: Dregora's Imprisonment
+  m_EditorClassIdentifier: 
+  itemName: Dregora's Imprisonment
+  itemDescription: "Immemorial Awakening:\n - Taking damage or casting spells gives
+    stacking +3 SpellDamage for 10 seconds, maximum 30 stacks.\n\nElder Supremacy:\n
+    - Owner gains 20% of SpellDamage as MagicResistance."
+  type: 4
+  icon: {fileID: 21300000, guid: 6eef66f03d7f81f45978c3e1c561763a, type: 3}
+  statModifiers:
+  - type: 0
+    value: 400
+    modifierType: 0
+  - type: 8
+    value: 50
+    modifierType: 0
+  - type: 6
+    value: 20
+    modifierType: 0
+  effects:
+  - {fileID: 11400000, guid: 027074ca5995cf04f8d0c08830fbc226, type: 2}
+  - {fileID: 0}

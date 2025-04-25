@@ -27,6 +27,8 @@ public class Character : MonoBehaviour, IDamageable
     public float damageAmplification;
     public float damageMultiplication;
 
+    public event Action<Character, StatType> OnStatChanged;
+
     public event Action<float> OnApplyDamage;
     public event Action<float> OnTakeDamage;
 
@@ -116,6 +118,22 @@ public class Character : MonoBehaviour, IDamageable
     public void Stop() => movement.Stop();
 
     public void LookAt(Vector3 worldPosition) => movement.LookAt(worldPosition);
+
+    public float GetStat(StatType statType) => 
+        statType switch
+        {
+            StatType.Health => health.Current,
+            StatType.HealthRegeneration => health.regeneration.Current,
+            StatType.Mana => mana.Current,
+            StatType.ManaRegeneration => mana.regeneration.Current,
+            StatType.Armor => armor.Current,
+            StatType.MagicResistance => magicResistance.Current,
+            StatType.MovementSpeed => speed.Current,
+            StatType.AttackDamage => attackDamage.Current,
+            StatType.AttackSpeed => attackSpeed.Current,
+            StatType.SpellDamage => spellDamage.Current,
+            _ => 0f
+        };
 
     protected virtual void Die()
     {

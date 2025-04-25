@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dc1951b4b06f342a55e04949fc36a9, type: 3}
+  m_Name: Maw of the Nameless
+  m_EditorClassIdentifier: 
+  effectName: Maw of the Nameless
+  modifiersPerStack:
+  - type: 4
+    value: 3
+    modifierType: 0
+  - type: 7
+    value: 2
+    modifierType: 0
+  - type: 8
+    value: 2
+    modifierType: 0
+  maxStackBonus:
+  - type: 7
+    value: 30
+    modifierType: 0
+  - type: 8
+    value: 30
+    modifierType: 0
+  maxStacks: 20
+  stackDuration: 5

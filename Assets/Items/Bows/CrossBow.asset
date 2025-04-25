@@ -17,6 +17,7 @@ MonoBehaviour:
 
     - Chosen target takes 50 + AttackDamage * 0.5 + SpellDamage
     * 0.3 physical damage and slows 30% for 2 seconds.'
+  type: 1
   icon: {fileID: 21300000, guid: df8f82a7741eb5843825243e871dcd9b, type: 3}
   statModifiers:
   - type: 4
