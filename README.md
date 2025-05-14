@@ -121,7 +121,7 @@ Custom academic license — see [LICENSE](./LICENSE) for details.
 For questions or collaboration:
 - Telegram: [@dodgecar69]
 - Email: sultanedil3@gmail.com
-[Join the community on Telegram](https://t.me/yedilstudio)
+- [Join the community on Telegram](https://t.me/yedilstudio)
 > “Powered by Unity, Driven by Passion.”
 
 ---
