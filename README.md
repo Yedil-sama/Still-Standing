@@ -46,10 +46,10 @@ Basically, Vampire Survivor + Dota.
 ## 🛠 Architecture & Principles
 
 - **SOLID Principles** throughout the codebase
-- Strategy Pattern used for Enemy/NPC, both are Characters, Behavior.
-- Factory Pattern used for Enemy/NPC spawning.
-- Singleton Pattern used for GameManager (only 90 lines of code).
-- Pool Pattern used for Projectiles.
+- **Strategy** Pattern used for Enemy/NPC, both are Characters, Behavior.
+- **Factory** Pattern used for Enemy/NPC spawning.
+- **Pool** Pattern used for Projectiles.
+- **Singleton** Pattern used for GameManager (only 90 lines of code).
 - Decoupled systems for extensibility (e.g., DamageSystem, StatSystem, InputSystem).
 - Flexible Stat System that can fit into any AAA project.
 
